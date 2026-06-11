@@ -1,5 +1,14 @@
+import { useAppContext } from "../context/AppContext";
+
 function UserInfo() {
-  return <div>UserInfo</div>;
+  const { state } = useAppContext();
+  const { name, isLoggedIn } = state.user;
+
+  return (
+    <div>
+      User: {name} ({isLoggedIn ? "Logged in" : "Guest"})
+    </div>
+  );
 }
 
 export default UserInfo;
