@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 
 type Product = {
   id: string;
@@ -15,10 +15,10 @@ function ProductCard({ product }: Props) {
   const renderCountRef = useRef(0);
   renderCountRef.current += 1;
 
-  const { dispatch } = useAppContext();
+  const { dispatchCart } = useCartContext();
 
   const handleAddToCart = () => {
-    dispatch({
+    dispatchCart({
       type: "cart/addItem",
       payload: {
         productId: product.id,
@@ -41,7 +41,9 @@ function ProductCard({ product }: Props) {
       <p>Price: ${product.price}</p>
       <button onClick={handleAddToCart}>Add to Cart</button>
       {import.meta.env.DEV && (
-        <small data-testid="render-count">Renders: {renderCountRef.current}</small>
+        <small data-testid="render-count">
+          Renders: {renderCountRef.current}
+        </small>
       )}
     </div>
   );

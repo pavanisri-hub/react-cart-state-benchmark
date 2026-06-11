@@ -1,8 +1,8 @@
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 
 function CartSummary() {
-  const { state } = useAppContext();
-  const { items } = state.cart;
+  const { cart } = useCartContext();
+  const { items } = cart;
 
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,

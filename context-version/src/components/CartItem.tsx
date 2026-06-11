@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 
 type CartItemProps = {
   item: {
@@ -14,18 +14,20 @@ function CartItem({ item }: CartItemProps) {
   const renderCountRef = useRef(0);
   renderCountRef.current += 1;
 
-  const { dispatch } = useAppContext();
+  const { dispatchCart } = useCartContext();
 
-  const handleChangeQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeQuantity = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const quantity = Number(event.target.value) || 0;
-    dispatch({
+    dispatchCart({
       type: "cart/updateQuantity",
       payload: { productId: item.productId, quantity },
     });
   };
 
   const handleRemove = () => {
-    dispatch({
+    dispatchCart({
       type: "cart/removeItem",
       payload: { productId: item.productId },
     });

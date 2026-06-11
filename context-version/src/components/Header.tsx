@@ -2,21 +2,18 @@ import { useRef } from "react";
 import UserInfo from "./UserInfo";
 import CartItemCount from "./CartItemCount";
 import ThemeSwitcher from "./ThemeSwitcher";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 
 function Header() {
   const renderCountRef = useRef(0);
   renderCountRef.current += 1;
 
-  const { state, dispatch } = useAppContext();
+  const { cart, dispatchCart } = useCartContext();
 
-  const totalItems = state.cart.items.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleToggleCart = () => {
-    dispatch({ type: "cart/toggleOpen" });
+    dispatchCart({ type: "cart/toggleOpen" });
   };
 
   return (
@@ -25,7 +22,7 @@ function Header() {
       <CartItemCount count={totalItems} />
       <ThemeSwitcher />
       <button onClick={handleToggleCart}>
-        {state.cart.isOpen ? "Close Cart" : "Open Cart"}
+        {cart.isOpen ? "Close Cart" : "Open Cart"}
       </button>
 
       {import.meta.env.DEV && (

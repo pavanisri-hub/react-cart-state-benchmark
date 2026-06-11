@@ -1,12 +1,11 @@
-import { useAppContext } from "../context/AppContext";
+import { useUserContext } from "../context/UserContext";
 
 function UserInfo() {
-  const { state } = useAppContext();
-  const { name, isLoggedIn } = state.user;
+  const { user } = useUserContext();
 
   return (
     <div>
-      User: {name} ({isLoggedIn ? "Logged in" : "Guest"})
+      User: {user.name} ({user.isLoggedIn ? "Logged in" : "Guest"})
     </div>
   );
 }

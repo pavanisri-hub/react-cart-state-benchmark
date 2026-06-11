@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 import CartItem from "./CartItem";
 import CartSummary from "./CartSummary";
 
@@ -7,8 +7,8 @@ function CartSidebar() {
   const renderCountRef = useRef(0);
   renderCountRef.current += 1;
 
-  const { state } = useAppContext();
-  const { items, isOpen } = state.cart;
+  const { cart } = useCartContext();
+  const { items, isOpen } = cart;
 
   if (!isOpen) {
     return null;

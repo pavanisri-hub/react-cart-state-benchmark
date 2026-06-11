@@ -1,19 +1,18 @@
-import { useAppContext } from "../context/AppContext";
+import { useUIContext } from "../context/UIContext";
 
 function ThemeSwitcher() {
-  const { state, dispatch } = useAppContext();
-  const { theme } = state.ui;
+  const { ui, dispatchUI } = useUIContext();
 
   const toggleTheme = () => {
-    dispatch({
+    dispatchUI({
       type: "ui/setTheme",
-      payload: { theme: theme === "light" ? "dark" : "light" },
+      payload: { theme: ui.theme === "light" ? "dark" : "light" },
     });
   };
 
   return (
     <button onClick={toggleTheme}>
-      Theme: {theme === "light" ? "Light" : "Dark"}
+      Theme: {ui.theme === "light" ? "Light" : "Dark"}
     </button>
   );
 }
